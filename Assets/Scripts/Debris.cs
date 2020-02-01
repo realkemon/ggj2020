@@ -20,8 +20,9 @@ public class Debris : MonoBehaviour
 
     public void HitWithPickaxe()
     {
-        GameObject newItem = Instantiate(undefinedPrefab, new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z), Quaternion.identity) as GameObject;
-        newItem.GetComponent<Rigidbody>().AddForce(Random.Range(50.0f, 80.0f), 100.0f, Random.Range(-40.0f, 50.0f));
+        Vector3 spawnPosition = new Vector3(transform.position.x + Random.value <= 0.5f ? trigger.size.x / 2 : -trigger.size.x / 2, transform.position.y + 0.5f, transform.position.z + Random.value <= 0.5f ? trigger.size.z / 2: -trigger.size.z / 2);
+        GameObject newItem = Instantiate(undefinedPrefab, transform.position + spawnPosition, Quaternion.identity) as GameObject;
+        newItem.GetComponent<Rigidbody>().AddForce(Random.Range(-50.0f, 50.0f), 80.0f, Random.Range(-50.0f, 50.0f));
         currentSize--;
         AdjustSize();
 
