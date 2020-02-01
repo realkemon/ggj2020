@@ -14,6 +14,7 @@ public class ConverterBuilding : MonoBehaviour
 
     private Transform producePosition;
     private bool isProducing;
+    private int lastCheckedObjectId;
 
     private void Start()
     {
@@ -22,8 +23,12 @@ public class ConverterBuilding : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.GetInstanceID() == lastCheckedObjectId)
+            return;
+
         if (other.gameObject.GetComponent<Item>())
         {
+            lastCheckedObjectId = other.gameObject.GetInstanceID();
             if (!isProducing && CheckRequirements(other.gameObject.GetComponent<Item>().itemType))
                 TakeItem(other.gameObject);
         }

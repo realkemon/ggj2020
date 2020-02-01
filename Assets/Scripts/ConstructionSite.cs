@@ -21,7 +21,8 @@ public class ConstructionSite : MonoBehaviour
     private Transform building;
     private float heightPerItem;
     private bool isGrowing;
-    
+    private int lastCheckedObjectId;
+
     private void Start()
     {
         building = transform.GetChild(0);
@@ -30,10 +31,14 @@ public class ConstructionSite : MonoBehaviour
         heightPerItem = buildingHeight / totalItemCount;
     }
     
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
+        if (other.gameObject.GetInstanceID() == lastCheckedObjectId)
+            return;
+
         if (other.gameObject.GetComponent<Item>())
         {
+            lastCheckedObjectId = other.gameObject.GetInstanceID();
             if (!isGrowing && CheckRequirements(other.gameObject.GetComponent<Item>().itemType))
                 TakeItem(other.gameObject);
         }

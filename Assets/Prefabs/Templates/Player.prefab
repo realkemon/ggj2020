@@ -94,6 +94,7 @@ GameObject:
   - component: {fileID: 146914282228926956}
   - component: {fileID: 146914282228926957}
   - component: {fileID: 146914282228926954}
+  - component: {fileID: -2785758723527305747}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -192,7 +193,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovementSpeedMultiplier: 0.12
   m_MovingTurnSpeed: 360
-  m_StationaryTurnSpeed: 360
+  m_StationaryTurnSpeed: 300
 --- !u!114 &146914282228926954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,3 +213,21 @@ MonoBehaviour:
   interactionDistance: 1
   groundOffset: -0.5
   throwMultiplier: 120
+--- !u!114 &-2785758723527305747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 146914282228926955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc1a0fa6e2061a4aa24d7ca5fe81aa0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerId: 1
+  layers:
+    serializedVersion: 2
+    m_Bits: 1024
+  interactionDistance: 1
+  groundOffset: -0.45
