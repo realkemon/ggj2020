@@ -8,6 +8,7 @@ public class ItemGrabber : MonoBehaviour
     public LayerMask layers;
     public float interactionDistance;
     public float groundOffset;
+    public float throwMultiplier;
 
     private GameObject heldItem;
 
@@ -48,13 +49,17 @@ public class ItemGrabber : MonoBehaviour
         itemToGrab.transform.SetParent(gameObject.transform);
         itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
         itemToGrab.transform.localEulerAngles = Vector3.zero;
+        itemToGrab.layer = 12; // Layer "Nothing"
         heldItem = itemToGrab;
     }
 
     private void ReleaseItem()
     {
-        heldItem.GetComponent<Rigidbody>().isKinematic = false;
         heldItem.transform.SetParent(null);
+        heldItem.GetComponent<Rigidbody>().isKinematic = false;
+        Vector3 throwDirection = transform.TransformDirection(Vector3.forward);
+        heldItem.GetComponent<Rigidbody>().AddForce(throwDirection.x * throwMultiplier, throwDirection.y + throwMultiplier, throwDirection.z * throwMultiplier);
+        heldItem.layer = 9; // Layer "Items"
         heldItem = null;
     }
 }
