@@ -114,7 +114,7 @@ public class ConstructionSite : MonoBehaviour
         {
             building.Translate(new Vector3(0.0f, heightPerItem / 30, 0.0f));
             step++;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.033333f);
         }
         isGrowing = false;
         CheckSum();

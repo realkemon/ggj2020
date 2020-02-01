@@ -102,9 +102,7 @@ public class WashingStation : MonoBehaviour
         if (heldItem.GetComponent<Item>().itemType != Globals.itemTypes.Undefined)
             return;
 
-        Debug.Log("wash wash wash");
-
-        doneWashTime += Time.deltaTime;
+        doneWashTime += Time.deltaTime * Globals.currentPlayerSpeedMultiplier;
 
         if (doneWashTime >= washTime)
             SwitchItem();

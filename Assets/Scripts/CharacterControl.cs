@@ -7,7 +7,7 @@ public class CharacterControl : MonoBehaviour
 {
     [SerializeField] float m_MovementSpeedMultiplier = 0.12f;
     [SerializeField] float m_MovingTurnSpeed = 360;
-    [SerializeField] float m_StationaryTurnSpeed = 360;
+    [SerializeField] float m_StationaryTurnSpeed = 300;
 
     Rigidbody m_Rigidbody;
     Animator m_Animator;
@@ -34,6 +34,6 @@ public class CharacterControl : MonoBehaviour
         float turnSpeed = Mathf.Lerp(m_StationaryTurnSpeed, m_MovingTurnSpeed, m_ForwardAmount);
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
 
-        transform.Translate(move * m_MovementSpeedMultiplier);
+        transform.Translate(move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier);
     }
 }

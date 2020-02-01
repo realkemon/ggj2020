@@ -212,6 +212,8 @@ MonoBehaviour:
     m_Bits: 512
   interactionDistance: 1
   groundOffset: -0.5
+  safetyOffset: 0.2
+  viewDegree: 12
   throwMultiplier: 120
 --- !u!114 &-2785758723527305747
 MonoBehaviour:
@@ -229,5 +231,7 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 1024
-  interactionDistance: 0.6
+  interactionDistance: 0.8
   groundOffset: -0.45
+  safetyOffset: 0.2
+  viewDegree: 15
