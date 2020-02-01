@@ -9,8 +9,15 @@ public class ItemGrabber : MonoBehaviour
     public float safetyOffset;
     public float viewDegree;
     public float throwMultiplier;
+    public GameObject handNode;
 
     private GameObject heldItem;
+    private Animator anim;
+
+    private void Start()
+    {
+        anim = GetComponentInChildren<Animator>();
+    }
 
     private void Update()
     {
@@ -76,10 +83,23 @@ public class ItemGrabber : MonoBehaviour
     private void GrabItem(GameObject itemToGrab)
     {
         itemToGrab.GetComponent<Rigidbody>().isKinematic = true;
-        itemToGrab.transform.SetParent(gameObject.transform);
-        itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
-        itemToGrab.transform.localEulerAngles = Vector3.zero;
         itemToGrab.layer = 12; // Layer "Nothing"
+
+        if (itemToGrab.GetComponent<Item>().itemType != Globals.itemTypes.Pickaxe)
+        {
+            itemToGrab.transform.SetParent(gameObject.transform);
+            itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
+            itemToGrab.transform.localEulerAngles = Vector3.zero;
+            anim.SetBool("isCarrying", true);
+        }
+        else
+        {
+            itemToGrab.transform.SetParent(handNode.transform);
+            itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
+            itemToGrab.transform.localEulerAngles = new Vector3(8.780001f, 73.34901f, 103.74f);
+            anim.SetBool("HasPickaxe", true);
+        }
+
         heldItem = itemToGrab;
     }
 
@@ -90,6 +110,8 @@ public class ItemGrabber : MonoBehaviour
         Vector3 throwDirection = transform.TransformDirection(Vector3.forward);
         heldItem.GetComponent<Rigidbody>().AddForce(throwDirection.x * throwMultiplier, throwDirection.y + throwMultiplier, throwDirection.z * throwMultiplier);
         heldItem.layer = 9; // Layer "Items"
+        anim.SetBool("isCarrying", false);
+        anim.SetBool("HasPickaxe", false);
         heldItem = null;
     }
 

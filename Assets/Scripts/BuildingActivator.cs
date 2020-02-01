@@ -11,10 +11,12 @@ public class BuildingActivator : MonoBehaviour
 
     private ItemGrabber grabber;
     private bool isButtonDown;
+    private Animator anim;
 
     private void Start()
     {
         grabber = GetComponent<ItemGrabber>();
+        anim = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -71,19 +73,31 @@ public class BuildingActivator : MonoBehaviour
                 if (hit.collider.gameObject.GetComponent<WashingStation>())
                 {
                     if (grabber.GetHeldItemType() == Globals.itemTypes.None)
-                        hit.collider.gameObject.GetComponent<WashingStation>().WashItem();
+                    {
+                        if (hit.collider.gameObject.GetComponent<WashingStation>().WashItem())
+                            anim.SetBool("isWashing", true);
+                        else
+                            anim.SetBool("isWashing", false);
+                    }
+
                 }
 
                 if (!isButtonDown && hit.collider.gameObject.GetComponent<Debris>())
                 {
                     if (grabber.GetHeldItemType() == Globals.itemTypes.Pickaxe)
+                    {
                         hit.collider.gameObject.GetComponent<Debris>().HitWithPickaxe();
+                        anim.SetTrigger("hit");
+                    }
                 }
             }
 
             isButtonDown = true;
         }
         else
+        {
             isButtonDown = false;
+            anim.SetBool("isWashing", false);
+        }
     }
 }

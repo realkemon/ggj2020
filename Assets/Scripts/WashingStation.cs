@@ -98,19 +98,24 @@ public class WashingStation : MonoBehaviour
         heldItem.transform.eulerAngles = Vector3.zero;
     }
 
-    public void WashItem()
+    public bool WashItem()
     {
         if (!heldItem)
-            return;
+            return false;
 
         if (heldItem.GetComponent<Item>().itemType != Globals.itemTypes.Undefined)
-            return;
+            return false;
 
         doneWashTime += Time.deltaTime * Globals.currentPlayerSpeedMultiplier;
         countdown.fillAmount = 1.0f / washTime * doneWashTime;
 
         if (doneWashTime >= washTime)
+        {
             SwitchItem();
+            return false;
+        }
+
+        return true;
     }
 
     private void SwitchItem()

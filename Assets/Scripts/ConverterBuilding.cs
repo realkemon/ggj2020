@@ -40,6 +40,12 @@ public class ConverterBuilding : MonoBehaviour
         }
     }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.GetInstanceID() == lastCheckedObjectId)
+            lastCheckedObjectId = 0;
+    }
+
     private bool CheckRequirements(Globals.itemTypes itemType)
     {
         switch (itemType)

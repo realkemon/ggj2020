@@ -2,7 +2,6 @@
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(CapsuleCollider))]
-[RequireComponent(typeof(Animator))]
 public class CharacterControl : MonoBehaviour
 {
     [SerializeField] float m_MovementSpeedMultiplier = 0.12f;
@@ -16,7 +15,7 @@ public class CharacterControl : MonoBehaviour
 
     void Start()
     {
-        m_Animator = GetComponent<Animator>();
+        m_Animator = GetComponentInChildren<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
 
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
@@ -35,5 +34,7 @@ public class CharacterControl : MonoBehaviour
         transform.Rotate(0, m_TurnAmount * turnSpeed * Time.deltaTime, 0);
 
         transform.Translate(move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier);
+
+        m_Animator.SetFloat("Speed", (move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier).magnitude);
     }
 }

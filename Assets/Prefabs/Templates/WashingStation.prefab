@@ -129,7 +129,7 @@ MonoBehaviour:
   brickPool: 1
   dirtPool: 1
   goldPool: 0
-  washTime: 1
+  washTime: 3
   woodPrefab: {fileID: 6832726577791925284, guid: 475f1382a686cfc44843ee349a73104d,
     type: 3}
   brickPrefab: {fileID: 3823983287202115462, guid: eb01667c9053fcc469910bfc71a8488d,
@@ -137,6 +137,7 @@ MonoBehaviour:
   dirtPrefab: {fileID: 7286716551751286020, guid: a6b27abab1738904695a84edc08a5474,
     type: 3}
   goldPrefab: {fileID: 0}
+  countdown: {fileID: 0}
 --- !u!65 &3102883421809082112
 BoxCollider:
   m_ObjectHideFlags: 0
