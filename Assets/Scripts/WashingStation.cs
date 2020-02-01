@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class WashingStation : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class WashingStation : MonoBehaviour
     public GameObject brickPrefab;
     public GameObject dirtPrefab;
     public GameObject goldPrefab;
+
+    public Image countdown;
 
     private GameObject heldItem;
     private int lastCheckedObjectId;
@@ -71,6 +74,7 @@ public class WashingStation : MonoBehaviour
     {
         lastCheckedObjectId = 0;
         doneWashTime = 0.0f;
+        countdown.fillAmount = 0.0f;
         if (other.gameObject == heldItem)
             heldItem = null;
     }
@@ -103,6 +107,7 @@ public class WashingStation : MonoBehaviour
             return;
 
         doneWashTime += Time.deltaTime * Globals.currentPlayerSpeedMultiplier;
+        countdown.fillAmount = 1.0f / washTime * doneWashTime;
 
         if (doneWashTime >= washTime)
             SwitchItem();
@@ -141,6 +146,7 @@ public class WashingStation : MonoBehaviour
 
         // Reset
         materialCount++;
+        countdown.fillAmount = 0.0f;
         doneWashTime = 0.0f;
     }
 }

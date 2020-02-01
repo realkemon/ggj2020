@@ -11,6 +11,7 @@ public class ConverterBuilding : MonoBehaviour
     public GameObject resultItemPrefab;
 
     public Text[] slots;
+    public Image countdown;
 
     private int givenDirt;
     private int givenWood;
@@ -74,8 +75,8 @@ public class ConverterBuilding : MonoBehaviour
         }
 
         Destroy(itemToTake);
-        UpdateRecipe();
         CheckSum();
+        UpdateRecipe();
     }
 
     private void CheckSum()
@@ -90,18 +91,32 @@ public class ConverterBuilding : MonoBehaviour
     private IEnumerator ProduceResultItem()
     {
         isProducing = true;
-        yield return new WaitForSeconds(waitTime);
+        float currentTime = 0.0f;
+        while (currentTime < waitTime)
+        {
+            currentTime += 0.01f;
+            countdown.fillAmount = 1.0f / waitTime * currentTime;
+            yield return new WaitForSeconds(0.01f);
+        }
         Instantiate(resultItemPrefab, producePosition.position, Quaternion.identity);
 
         // Reset
         givenDirt = 0;
         givenWood = 0;
         isProducing = false;
+        countdown.fillAmount = 0.0f;
         UpdateRecipe();
     }
 
     private void UpdateRecipe()
     {
+        if (isProducing)
+        {
+            slots[0].text = "";
+            slots[1].text = "";
+            return;
+        }
+
         if (dirtRequirement > 0)
         {
             slots[1].text = dirtRequirement - givenDirt + "x Dirt";
