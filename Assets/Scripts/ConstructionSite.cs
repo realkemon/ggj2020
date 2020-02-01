@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConstructionSite : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ConstructionSite : MonoBehaviour
 
     public GameObject buildingPrefab;
     public float buildingHeight;
+
+    public Text[] slots;
 
     private int givenWood;
     private int givenBrick;
@@ -29,6 +32,8 @@ public class ConstructionSite : MonoBehaviour
         building.localPosition = new Vector3(0.0f, -buildingHeight, 0.0f);
         int totalItemCount = woodRequirement + brickRequirement + cementRequirement + plankRequirement + goldRequirement;
         heightPerItem = buildingHeight / totalItemCount;
+
+        UpdateRecipe();
     }
     
     private void OnTriggerEnter(Collider other)
@@ -103,6 +108,7 @@ public class ConstructionSite : MonoBehaviour
         }
 
         Destroy(itemToTake);
+        UpdateRecipe();
         StartCoroutine(GrowBuilding());
     }
 
@@ -128,8 +134,48 @@ public class ConstructionSite : MonoBehaviour
             givenPlank == plankRequirement &&
             givenWood == woodRequirement)
         {
-            Instantiate(buildingPrefab, transform.position, Quaternion.identity);
+            //Instantiate(buildingPrefab, transform.position, Quaternion.identity);
+            buildingPrefab.SetActive(true);
+            Destroy(slots[0].transform.parent.gameObject);
             Destroy(gameObject);
         }
+    }
+
+    private void UpdateRecipe()
+    {
+        int count = 0;
+
+        if (goldRequirement > 0 && givenGold < goldRequirement)
+        {
+            slots[count].text = goldRequirement - givenGold + "x Gold";
+            count++;
+        }
+
+        if (plankRequirement > 0 && givenPlank < plankRequirement)
+        {
+            slots[count].text = plankRequirement - givenPlank + "x Planks";
+            count++;
+        }
+
+        if (cementRequirement > 0 && givenCement < cementRequirement)
+        {
+            slots[count].text = cementRequirement - givenCement + "x Cement";
+            count++;
+        }
+
+        if (woodRequirement > 0 && givenWood < woodRequirement)
+        {
+            slots[count].text = woodRequirement - givenWood + "x Wood";
+            count++;
+        }
+
+        if (brickRequirement > 0 && givenBrick < brickRequirement)
+        {
+            slots[count].text = brickRequirement - givenBrick + "x Bricks";
+            count++;
+        }
+
+        for (int g = count; g < slots.Length; g++)
+            slots[g].text = "";
     }
 }

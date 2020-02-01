@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ConverterBuilding : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class ConverterBuilding : MonoBehaviour
 
     public float waitTime;
     public GameObject resultItemPrefab;
+
+    public Text[] slots;
 
     private int givenDirt;
     private int givenWood;
@@ -19,6 +22,8 @@ public class ConverterBuilding : MonoBehaviour
     private void Start()
     {
         producePosition = transform.GetChild(0);
+        slots[0].transform.parent.gameObject.SetActive(true);
+        UpdateRecipe();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -69,6 +74,7 @@ public class ConverterBuilding : MonoBehaviour
         }
 
         Destroy(itemToTake);
+        UpdateRecipe();
         CheckSum();
     }
 
@@ -91,5 +97,20 @@ public class ConverterBuilding : MonoBehaviour
         givenDirt = 0;
         givenWood = 0;
         isProducing = false;
+        UpdateRecipe();
+    }
+
+    private void UpdateRecipe()
+    {
+        if (dirtRequirement > 0)
+        {
+            slots[1].text = dirtRequirement - givenDirt + "x Dirt";
+            slots[0].text = "for 1x Cement";
+        }
+        else if (woodRequirement > 0)
+        {
+            slots[1].text = woodRequirement - givenWood + "x Wood";
+            slots[0].text = "for 1x Plank";
+        }
     }
 }
