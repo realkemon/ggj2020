@@ -1,12 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Globals : MonoBehaviour
 {
-
     public enum itemTypes
     {
+        None,
         Undefined,
         Wood,
         Brick,

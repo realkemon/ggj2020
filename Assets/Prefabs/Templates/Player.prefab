@@ -229,5 +229,5 @@ MonoBehaviour:
   layers:
     serializedVersion: 2
     m_Bits: 1024
-  interactionDistance: 1
+  interactionDistance: 0.6
   groundOffset: -0.45

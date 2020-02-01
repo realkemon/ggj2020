@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ItemGrabber : MonoBehaviour
 {
@@ -11,10 +9,6 @@ public class ItemGrabber : MonoBehaviour
     public float throwMultiplier;
 
     private GameObject heldItem;
-
-    private void Start()
-    {
-    }
 
     private void Update()
     {
@@ -61,5 +55,13 @@ public class ItemGrabber : MonoBehaviour
         heldItem.GetComponent<Rigidbody>().AddForce(throwDirection.x * throwMultiplier, throwDirection.y + throwMultiplier, throwDirection.z * throwMultiplier);
         heldItem.layer = 9; // Layer "Items"
         heldItem = null;
+    }
+
+    public Globals.itemTypes GetHeldItemType()
+    {
+        if (heldItem)
+            return heldItem.GetComponent<Item>().itemType;
+        else
+            return Globals.itemTypes.None;
     }
 }

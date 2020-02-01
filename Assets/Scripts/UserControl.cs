@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
 
 [RequireComponent(typeof(CharacterControl))]
 public class UserControl : MonoBehaviour
@@ -23,8 +22,8 @@ public class UserControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        float h = CrossPlatformInputManager.GetAxis("HorizontalPlayer" + playerId);
-        float v = CrossPlatformInputManager.GetAxis("VerticalPlayer" + playerId);
+        float h = Input.GetAxis("HorizontalPlayer" + playerId);
+        float v = Input.GetAxis("VerticalPlayer" + playerId);
 
         m_CamForward = Vector3.Scale(m_Cam.forward, new Vector3(1, 0, 1)).normalized;
         m_Move = v * m_CamForward + h * m_Cam.right;

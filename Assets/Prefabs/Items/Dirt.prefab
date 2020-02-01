@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab9bfc85af459ec4bb8cf36f9e54b748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 3
+  itemType: 4
   carryingPosition: {x: 0, y: 0.2, z: 0.4}
 --- !u!33 &7286716551751286016
 MeshFilter:

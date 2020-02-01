@@ -14,17 +14,13 @@ public class WashingStation : MonoBehaviour
     public GameObject goldPrefab;
 
     private GameObject heldItem;
-    private Transform producePosition;
     private int lastCheckedObjectId;
     private float doneWashTime;
-
     private int materialCount;
     private int[] materialResults;
 
     private void Start()
     {
-        producePosition = transform.GetChild(0);
-
         materialResults = new int[woodPool + brickPool + dirtPool + goldPool];
         int count = 0;
         for (int i = 0; i < woodPool; i++)
@@ -128,16 +124,16 @@ public class WashingStation : MonoBehaviour
         switch (materialResults[materialCount])
         {
             case 0:
-                newItem = Instantiate(woodPrefab, producePosition.position, Quaternion.identity) as GameObject;
+                newItem = Instantiate(woodPrefab, transform.position, Quaternion.identity) as GameObject;
                 break;
             case 1:
-                newItem = Instantiate(brickPrefab, producePosition.position, Quaternion.identity) as GameObject;
+                newItem = Instantiate(brickPrefab, transform.position, Quaternion.identity) as GameObject;
                 break;
             case 2:
-                newItem = Instantiate(dirtPrefab, producePosition.position, Quaternion.identity) as GameObject;
+                newItem = Instantiate(dirtPrefab, transform.position, Quaternion.identity) as GameObject;
                 break;
             case 3:
-                newItem = Instantiate(goldPrefab, producePosition.position, Quaternion.identity) as GameObject;
+                newItem = Instantiate(goldPrefab, transform.position, Quaternion.identity) as GameObject;
                 break;
             default:
                 Debug.LogError("Item not defined.");
