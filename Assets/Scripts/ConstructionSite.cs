@@ -15,6 +15,11 @@ public class ConstructionSite : MonoBehaviour
 
     public Text[] slots;
 
+    public AudioClip growAudio;
+    public AudioClip readyAudio;
+
+    public string debugKey;
+
     private int givenWood;
     private int givenBrick;
     private int givenCement;
@@ -34,6 +39,19 @@ public class ConstructionSite : MonoBehaviour
         heightPerItem = buildingHeight / totalItemCount;
 
         UpdateRecipe();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(debugKey))
+        {
+            givenBrick = brickRequirement;
+            givenWood = woodRequirement;
+            givenCement = cementRequirement;
+            givenPlank = plankRequirement;
+            givenGold = goldRequirement;
+            CheckSum();
+        }
     }
     
     private void OnTriggerEnter(Collider other)
@@ -121,6 +139,7 @@ public class ConstructionSite : MonoBehaviour
     private IEnumerator GrowBuilding()
     {
         isGrowing = true;
+        GetComponent<AudioSource>().PlayOneShot(growAudio);
         int step = 0;
         while (step <= 30)
         {
@@ -141,6 +160,7 @@ public class ConstructionSite : MonoBehaviour
             givenWood == woodRequirement)
         {
             //Instantiate(buildingPrefab, transform.position, Quaternion.identity);
+            GetComponent<AudioSource>().PlayOneShot(readyAudio);
             buildingPrefab.SetActive(true);
             Destroy(slots[0].transform.parent.gameObject);
             Destroy(gameObject);

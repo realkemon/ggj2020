@@ -10,6 +10,7 @@ public class CharacterControl : MonoBehaviour
 
     Rigidbody m_Rigidbody;
     Animator m_Animator;
+    AudioSource audio;
     float m_TurnAmount;
     float m_ForwardAmount;
 
@@ -17,6 +18,7 @@ public class CharacterControl : MonoBehaviour
     {
         m_Animator = GetComponentInChildren<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
 
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
@@ -36,5 +38,13 @@ public class CharacterControl : MonoBehaviour
         transform.Translate(move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier);
 
         m_Animator.SetFloat("Speed", (move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier).magnitude);
+
+        if ((move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier).magnitude > 0.03f)
+        {
+            if (!audio.isPlaying)
+                audio.Play();
+        }
+        else
+            audio.Stop();
     }
 }

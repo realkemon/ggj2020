@@ -13,6 +13,8 @@ public class ConverterBuilding : MonoBehaviour
     public Text[] slots;
     public Image countdown;
 
+    public AudioClip buildingAudio;
+
     private int givenDirt;
     private int givenWood;
 
@@ -98,6 +100,7 @@ public class ConverterBuilding : MonoBehaviour
     {
         isProducing = true;
         float currentTime = 0.0f;
+        GetComponent<AudioSource>().PlayOneShot(buildingAudio);
         while (currentTime < waitTime)
         {
             currentTime += 0.01f;

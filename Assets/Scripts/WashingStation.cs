@@ -15,6 +15,7 @@ public class WashingStation : MonoBehaviour
     public GameObject goldPrefab;
 
     public Image countdown;
+    public AudioClip washingAudio;
 
     private GameObject heldItem;
     private int lastCheckedObjectId;
@@ -101,21 +102,35 @@ public class WashingStation : MonoBehaviour
     public bool WashItem()
     {
         if (!heldItem)
+        {
+            GetComponent<AudioSource>().Stop();
             return false;
+        }
 
         if (heldItem.GetComponent<Item>().itemType != Globals.itemTypes.Undefined)
+        {
+            GetComponent<AudioSource>().Stop();
             return false;
+        }
 
         doneWashTime += Time.deltaTime * Globals.currentPlayerSpeedMultiplier;
         countdown.fillAmount = 1.0f / washTime * doneWashTime;
+        if (!GetComponent<AudioSource>().isPlaying)
+            GetComponent<AudioSource>().PlayOneShot(washingAudio);
 
         if (doneWashTime >= washTime)
         {
             SwitchItem();
+            GetComponent<AudioSource>().Stop();
             return false;
         }
 
         return true;
+    }
+
+    public void StopWashing()
+    {
+        GetComponent<AudioSource>().Stop();
     }
 
     private void SwitchItem()
