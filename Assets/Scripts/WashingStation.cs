@@ -148,6 +148,7 @@ public class WashingStation : MonoBehaviour
                 break;
         }
         newItem.GetComponent<Rigidbody>().isKinematic = true;
+        newItem.transform.eulerAngles = transform.rotation.eulerAngles;
 
         // Reset
         materialCount++;

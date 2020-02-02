@@ -1,7 +1,7 @@
 # Exported by VoxEdit Alpha v0.12.0c2355d - 2047 textured quads.
 
 g Model
-mtllib item_cement.mtl
+mtllib item_cement_grey.mtl
 usemtl PlainTexture
 
 # Left faces
