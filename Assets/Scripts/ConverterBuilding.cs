@@ -128,12 +128,12 @@ public class ConverterBuilding : MonoBehaviour
 
         if (dirtRequirement > 0)
         {
-            slots[1].text = dirtRequirement - givenDirt + "x Dirt";
+            slots[1].text = dirtRequirement - givenDirt + "/" + dirtRequirement;
             slots[0].text = "for 1x Cement";
         }
         else if (woodRequirement > 0)
         {
-            slots[1].text = woodRequirement - givenWood + "x Wood";
+            slots[1].text = woodRequirement - givenWood + "/" + woodRequirement;
             slots[0].text = "for 1x Plank";
         }
     }

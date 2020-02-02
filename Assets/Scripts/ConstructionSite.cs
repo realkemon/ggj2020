@@ -171,33 +171,33 @@ public class ConstructionSite : MonoBehaviour
     {
         int count = 0;
 
-        if (goldRequirement > 0 && givenGold < goldRequirement)
+        if (goldRequirement > 0)
         {
-            slots[count].text = goldRequirement - givenGold + "x Gold";
+            slots[count].text = goldRequirement - givenGold + "/" + goldRequirement;
             count++;
         }
 
-        if (plankRequirement > 0 && givenPlank < plankRequirement)
+        if (plankRequirement > 0)
         {
-            slots[count].text = plankRequirement - givenPlank + "x Planks";
+            slots[count].text = plankRequirement - givenPlank + "/" + plankRequirement;
             count++;
         }
 
-        if (cementRequirement > 0 && givenCement < cementRequirement)
+        if (cementRequirement > 0)
         {
-            slots[count].text = cementRequirement - givenCement + "x Cement";
+            slots[count].text = cementRequirement - givenCement + "/" + cementRequirement;
             count++;
         }
 
-        if (woodRequirement > 0 && givenWood < woodRequirement)
+        if (woodRequirement > 0)
         {
-            slots[count].text = woodRequirement - givenWood + "x Wood";
+            slots[count].text = woodRequirement - givenWood + "/" + woodRequirement;
             count++;
         }
 
-        if (brickRequirement > 0 && givenBrick < brickRequirement)
+        if (brickRequirement > 0)
         {
-            slots[count].text = brickRequirement - givenBrick + "x Bricks";
+            slots[count].text = brickRequirement - givenBrick + "/" + brickRequirement;
             count++;
         }
 
