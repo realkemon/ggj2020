@@ -10,7 +10,7 @@ public class CharacterControl : MonoBehaviour
 
     Rigidbody m_Rigidbody;
     Animator m_Animator;
-    AudioSource audio;
+    AudioSource audioS;
     float m_TurnAmount;
     float m_ForwardAmount;
 
@@ -18,7 +18,7 @@ public class CharacterControl : MonoBehaviour
     {
         m_Animator = GetComponentInChildren<Animator>();
         m_Rigidbody = GetComponent<Rigidbody>();
-        audio = GetComponent<AudioSource>();
+        audioS = GetComponent<AudioSource>();
 
         m_Rigidbody.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezeRotationZ;
     }
@@ -41,10 +41,10 @@ public class CharacterControl : MonoBehaviour
 
         if ((move * m_MovementSpeedMultiplier * Globals.currentPlayerSpeedMultiplier).magnitude > 0.03f)
         {
-            if (!audio.isPlaying)
-                audio.Play();
+            if (!audioS.isPlaying)
+                audioS.Play();
         }
         else
-            audio.Stop();
+            audioS.Stop();
     }
 }

@@ -15,6 +15,7 @@ public class WashingStation : MonoBehaviour
     public GameObject goldPrefab;
 
     public Image countdown;
+    public GameObject[] uiElements;
     public AudioClip washingAudio;
 
     private GameObject heldItem;
@@ -76,6 +77,8 @@ public class WashingStation : MonoBehaviour
         lastCheckedObjectId = 0;
         doneWashTime = 0.0f;
         countdown.fillAmount = 0.0f;
+        for (int b = 0; b < uiElements.Length; b++)
+            uiElements[b].SetActive(true);
         if (other.gameObject == heldItem)
             heldItem = null;
     }
@@ -113,6 +116,8 @@ public class WashingStation : MonoBehaviour
             return false;
         }
 
+        for (int b = 0; b < uiElements.Length; b++)
+            uiElements[b].SetActive(false);
         doneWashTime += Time.deltaTime * Globals.currentPlayerSpeedMultiplier;
         countdown.fillAmount = 1.0f / washTime * doneWashTime;
         if (!GetComponent<AudioSource>().isPlaying)
@@ -168,6 +173,8 @@ public class WashingStation : MonoBehaviour
         // Reset
         materialCount++;
         countdown.fillAmount = 0.0f;
+        for (int b = 0; b < uiElements.Length; b++)
+            uiElements[b].SetActive(true);
         doneWashTime = 0.0f;
     }
 }

@@ -13,6 +13,8 @@ public class ConverterBuilding : MonoBehaviour
     public Text[] slots;
     public Image countdown;
 
+    public GameObject[] uiElements;
+
     public AudioClip buildingAudio;
 
     private int givenDirt;
@@ -101,6 +103,8 @@ public class ConverterBuilding : MonoBehaviour
         isProducing = true;
         float currentTime = 0.0f;
         GetComponent<AudioSource>().PlayOneShot(buildingAudio);
+        for (int b = 0; b < uiElements.Length; b++)
+            uiElements[b].SetActive(false);
         while (currentTime < waitTime)
         {
             currentTime += 0.01f;
@@ -114,6 +118,8 @@ public class ConverterBuilding : MonoBehaviour
         givenWood = 0;
         isProducing = false;
         countdown.fillAmount = 0.0f;
+        for (int b = 0; b < uiElements.Length; b++)
+            uiElements[b].SetActive(true);
         UpdateRecipe();
     }
 
@@ -128,13 +134,13 @@ public class ConverterBuilding : MonoBehaviour
 
         if (dirtRequirement > 0)
         {
-            slots[1].text = dirtRequirement - givenDirt + "/" + dirtRequirement;
-            slots[0].text = "for 1x Cement";
+            slots[1].text = givenDirt + "/" + dirtRequirement;
+            slots[0].text = "= 1";
         }
         else if (woodRequirement > 0)
         {
-            slots[1].text = woodRequirement - givenWood + "/" + woodRequirement;
-            slots[0].text = "for 1x Plank";
+            slots[1].text = givenWood + "/" + woodRequirement;
+            slots[0].text = "= 1";
         }
     }
 }

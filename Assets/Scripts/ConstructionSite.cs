@@ -160,7 +160,7 @@ public class ConstructionSite : MonoBehaviour
             givenWood == woodRequirement)
         {
             //Instantiate(buildingPrefab, transform.position, Quaternion.identity);
-            GetComponent<AudioSource>().PlayOneShot(readyAudio);
+            //GetComponent<AudioSource>().PlayOneShot(readyAudio);
             buildingPrefab.SetActive(true);
             Destroy(slots[0].transform.parent.gameObject);
             Destroy(gameObject);
@@ -173,31 +173,31 @@ public class ConstructionSite : MonoBehaviour
 
         if (goldRequirement > 0)
         {
-            slots[count].text = goldRequirement - givenGold + "/" + goldRequirement;
+            slots[count].text = givenGold + "/" + goldRequirement;
             count++;
         }
 
         if (plankRequirement > 0)
         {
-            slots[count].text = plankRequirement - givenPlank + "/" + plankRequirement;
+            slots[count].text = givenPlank + "/" + plankRequirement;
             count++;
         }
 
         if (cementRequirement > 0)
         {
-            slots[count].text = cementRequirement - givenCement + "/" + cementRequirement;
+            slots[count].text = givenCement + "/" + cementRequirement;
             count++;
         }
 
         if (woodRequirement > 0)
         {
-            slots[count].text = woodRequirement - givenWood + "/" + woodRequirement;
+            slots[count].text = givenWood + "/" + woodRequirement;
             count++;
         }
 
         if (brickRequirement > 0)
         {
-            slots[count].text = brickRequirement - givenBrick + "/" + brickRequirement;
+            slots[count].text = givenBrick + "/" + brickRequirement;
             count++;
         }
 
