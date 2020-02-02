@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cac1f929518876d46a6c4c3dfbb796e9, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,10 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8940c78b481ac742895f92324e27a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodPool: 1
-  brickPool: 1
-  dirtPool: 1
-  goldPool: 0
+  woodPool: 26
+  brickPool: 9
+  dirtPool: 30
+  goldPool: 2
   washTime: 3
   woodPrefab: {fileID: 6832726577791925284, guid: 475f1382a686cfc44843ee349a73104d,
     type: 3}
@@ -136,7 +136,8 @@ MonoBehaviour:
     type: 3}
   dirtPrefab: {fileID: 7286716551751286020, guid: a6b27abab1738904695a84edc08a5474,
     type: 3}
-  goldPrefab: {fileID: 0}
+  goldPrefab: {fileID: 7359365367731818688, guid: 3640e3ec0badf2c44a92da279292b73b,
+    type: 3}
   countdown: {fileID: 0}
 --- !u!65 &3102883421809082112
 BoxCollider:
