@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8940c78b481ac742895f92324e27a41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  woodPool: 26
+  woodPool: 25
   brickPool: 9
   dirtPool: 30
-  goldPool: 2
+  goldPool: 3
   washTime: 3
   woodPrefab: {fileID: 6832726577791925284, guid: 475f1382a686cfc44843ee349a73104d,
     type: 3}
@@ -140,6 +140,8 @@ MonoBehaviour:
   goldPrefab: {fileID: 7359365367731818688, guid: 3640e3ec0badf2c44a92da279292b73b,
     type: 3}
   countdown: {fileID: 0}
+  uiElements:
+  - {fileID: 0}
   washingAudio: {fileID: 8300000, guid: 07e882de94d5fce4f8d1b5c7f58903d0, type: 3}
 --- !u!65 &3102883421809082112
 BoxCollider:
