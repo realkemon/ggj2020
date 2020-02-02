@@ -27,7 +27,7 @@ public class ConverterBuilding : MonoBehaviour
     private void Start()
     {
         producePosition = transform.GetChild(0);
-        slots[0].transform.parent.gameObject.SetActive(true);
+        slots[0].transform.parent.transform.parent.gameObject.SetActive(true);
         UpdateRecipe();
     }
 
