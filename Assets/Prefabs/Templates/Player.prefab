@@ -118,9 +118,9 @@ MonoBehaviour:
   viewDegree: 12
   throwMultiplier: 120
   handNode: {fileID: 680716736983271225}
-  materialAudio: {fileID: 0}
-  pickaxeAudio: {fileID: 0}
-  goldAudio: {fileID: 0}
+  materialAudio: {fileID: 8300000, guid: 6be16c877ebf16643b3ca96ee43dae9d, type: 3}
+  pickaxeAudio: {fileID: 8300000, guid: c738701ed5d07a5499164ef297bb1b77, type: 3}
+  goldAudio: {fileID: 8300000, guid: d8702dba6ed5e92419f7aef1ca40b124, type: 3}
 --- !u!114 &-2785758723527305747
 MonoBehaviour:
   m_ObjectHideFlags: 0
