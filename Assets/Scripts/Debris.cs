@@ -7,7 +7,6 @@ public class Debris : MonoBehaviour
     public GameObject smallSize;
     public GameObject mediumSize;
     public GameObject bigSize;
-    public AudioClip debrisAudio;
 
     private int currentSize;
     private BoxCollider trigger;
@@ -26,7 +25,7 @@ public class Debris : MonoBehaviour
         newItem.GetComponent<Rigidbody>().AddForce(Random.Range(-50.0f, 50.0f), 80.0f, Random.Range(-50.0f, 50.0f));
         currentSize--;
         AdjustSize();
-        GetComponent<AudioSource>().PlayOneShot(debrisAudio);
+        SoundManager.instance.PlayDebrisHitSound();
 
         if (currentSize == 0)
             Destroy(gameObject);

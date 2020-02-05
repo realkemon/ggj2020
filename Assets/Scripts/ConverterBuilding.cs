@@ -9,13 +9,12 @@ public class ConverterBuilding : MonoBehaviour
 
     public float waitTime;
     public GameObject resultItemPrefab;
+    public Animator buildingAnimator;
 
+    public int usedClipIndex;
     public Text[] slots;
     public Image countdown;
-
     public GameObject[] uiElements;
-
-    public AudioClip buildingAudio;
 
     private int givenDirt;
     private int givenWood;
@@ -27,6 +26,7 @@ public class ConverterBuilding : MonoBehaviour
     private void Start()
     {
         producePosition = transform.GetChild(0);
+        buildingAnimator.SetBool("isWorking", true);
         slots[0].transform.parent.transform.parent.gameObject.SetActive(true);
         UpdateRecipe();
     }
@@ -85,8 +85,9 @@ public class ConverterBuilding : MonoBehaviour
         }
 
         Destroy(itemToTake);
-        CheckSum();
         UpdateRecipe();
+        SoundManager.instance.PlayItemAcceptSound();
+        CheckSum();
     }
 
     private void CheckSum()
@@ -102,7 +103,8 @@ public class ConverterBuilding : MonoBehaviour
     {
         isProducing = true;
         float currentTime = 0.0f;
-        GetComponent<AudioSource>().PlayOneShot(buildingAudio);
+        SoundManager.instance.PlayConverterUsedSound(usedClipIndex);
+        buildingAnimator.SetBool("isBeingUsed", true);
         for (int b = 0; b < uiElements.Length; b++)
             uiElements[b].SetActive(false);
         while (currentTime < waitTime)
@@ -117,6 +119,7 @@ public class ConverterBuilding : MonoBehaviour
         givenDirt = 0;
         givenWood = 0;
         isProducing = false;
+        buildingAnimator.SetBool("isBeingUsed", false);
         countdown.fillAmount = 0.0f;
         for (int b = 0; b < uiElements.Length; b++)
             uiElements[b].SetActive(true);

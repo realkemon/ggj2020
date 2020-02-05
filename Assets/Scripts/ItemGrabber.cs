@@ -11,10 +11,6 @@ public class ItemGrabber : MonoBehaviour
     public float throwMultiplier;
     public GameObject handNode;
 
-    public AudioClip materialAudio;
-    public AudioClip pickaxeAudio;
-    public AudioClip goldAudio;
-
     private GameObject heldItem;
     private Animator anim;
 
@@ -94,7 +90,6 @@ public class ItemGrabber : MonoBehaviour
             itemToGrab.transform.SetParent(gameObject.transform);
             itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
             itemToGrab.transform.localEulerAngles = Vector3.zero;
-            GetComponent<AudioSource>().PlayOneShot(pickaxeAudio);
             anim.SetBool("isCarrying", true);
         }
         else
@@ -102,13 +97,10 @@ public class ItemGrabber : MonoBehaviour
             itemToGrab.transform.SetParent(handNode.transform);
             itemToGrab.transform.localPosition = itemToGrab.GetComponent<Item>().carryingPosition;
             itemToGrab.transform.localEulerAngles = new Vector3(8.780001f, 73.34901f, 103.74f);
-            if (itemToGrab.GetComponent<Item>().itemType == Globals.itemTypes.Gold)
-                GetComponent<AudioSource>().PlayOneShot(goldAudio);
-            else
-                GetComponent<AudioSource>().PlayOneShot(materialAudio);
             anim.SetBool("HasPickaxe", true);
         }
 
+        SoundManager.instance.PlayItemPickUpSound();
         heldItem = itemToGrab;
     }
 

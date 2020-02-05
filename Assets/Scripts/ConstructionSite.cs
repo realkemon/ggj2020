@@ -10,15 +10,12 @@ public class ConstructionSite : MonoBehaviour
     public int plankRequirement;
     public int goldRequirement;
 
-    public GameObject buildingPrefab;
+    public GameObject building;
+    public GameObject model;
     public float buildingHeight;
 
+    public int finishedClipIndex;
     public Text[] slots;
-
-    public AudioClip growAudio;
-    public AudioClip readyAudio;
-
-    public string debugKey;
 
     private int givenWood;
     private int givenBrick;
@@ -26,34 +23,20 @@ public class ConstructionSite : MonoBehaviour
     private int givenPlank;
     private int givenGold;
 
-    private Transform building;
     private float heightPerItem;
+    private float originalHeight;
     private bool isGrowing;
     private int lastCheckedObjectId;
 
     private void Start()
     {
-        building = transform.GetChild(0);
-        building.localPosition = new Vector3(0.0f, -buildingHeight, 0.0f);
+        originalHeight = model.transform.position.y;
+        model.transform.position = new Vector3(model.transform.position.x, model.transform.position.y - buildingHeight, model.transform.position.z);
         int totalItemCount = woodRequirement + brickRequirement + cementRequirement + plankRequirement + goldRequirement;
         heightPerItem = buildingHeight / totalItemCount;
-
         UpdateRecipe();
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(debugKey))
-        {
-            givenBrick = brickRequirement;
-            givenWood = woodRequirement;
-            givenCement = cementRequirement;
-            givenPlank = plankRequirement;
-            givenGold = goldRequirement;
-            CheckSum();
-        }
-    }
-    
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.GetInstanceID() == lastCheckedObjectId)
@@ -133,17 +116,18 @@ public class ConstructionSite : MonoBehaviour
 
         Destroy(itemToTake);
         UpdateRecipe();
+        SoundManager.instance.PlayItemAcceptSound();
         StartCoroutine(GrowBuilding());
     }
 
     private IEnumerator GrowBuilding()
     {
         isGrowing = true;
-        GetComponent<AudioSource>().PlayOneShot(growAudio);
+        SoundManager.instance.PlayBuildingGrowSound();
         int step = 0;
-        while (step <= 30)
+        while (step < 30)
         {
-            building.Translate(new Vector3(0.0f, heightPerItem / 30, 0.0f));
+            model.transform.Translate(new Vector3(0.0f, heightPerItem / 30, 0.0f));
             step++;
             yield return new WaitForSeconds(0.033333f);
         }
@@ -159,12 +143,17 @@ public class ConstructionSite : MonoBehaviour
             givenPlank == plankRequirement &&
             givenWood == woodRequirement)
         {
-            //Instantiate(buildingPrefab, transform.position, Quaternion.identity);
-            //GetComponent<AudioSource>().PlayOneShot(readyAudio);
-            buildingPrefab.SetActive(true);
-            Destroy(slots[0].transform.parent.gameObject);
-            Destroy(gameObject);
+            FinishBuilding();
         }
+    }
+
+    public void FinishBuilding()
+    {
+        model.transform.position = new Vector3(model.transform.position.x, originalHeight, model.transform.position.z);
+        building.SetActive(true);
+        SoundManager.instance.PlayBuildingFinishedSound(finishedClipIndex);
+        Destroy(slots[0].transform.parent.gameObject);
+        Destroy(gameObject);
     }
 
     private void UpdateRecipe()
